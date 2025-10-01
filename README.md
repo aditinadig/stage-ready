@@ -1,132 +1,141 @@
 # 🎵 StageReady
 
-> A collaborative rehearsal platform for musicians and singers with personalized, real-time part assignments.
+> A collaborative rehearsal platform that transforms how performance groups prepare together
 
 ---
 
-## 📋 Overview
+## Overview
 
-StageReady helps performance groups coordinate rehearsals by providing each performer with a personalized view of their assigned parts. Managers upload lyrics line-by-line and assign specific lines to performers, while singers and musicians see only what's relevant to them during practice.
+StageReady is a mobile application designed to streamline group rehearsals by providing each performer with a personalized, real-time view of their assigned parts. The platform eliminates the confusion of shared sheet music and enables seamless coordination between managers, singers, and musicians.
 
-**Three user roles:**
-- 🎤 **Singers** - View assigned lyrics with clear visual indicators
-- 🎸 **Musicians** - See chord progressions alongside vocal cues  
-- 👔 **Managers** - Upload content and assign parts to performers
+### How It Works
+
+**For Managers:**
+Upload song lyrics line-by-line and assign specific lines to individual performers. Make changes on the fly and see updates reflected instantly across all devices.
+
+**For Singers:**
+See only your assigned lyrics with clear visual cues for when to enter. Other performers' parts remain visible but de-emphasized for context.
+
+**For Musicians:**
+View chord progressions alongside vocal information, with highlighted sections showing exactly when and where to play.
 
 ---
 
-## 🎨 HCI Design Principles
+## 🎨 Design Philosophy
 
-### Visual Design
+### User-Centered Interface
 
-**Color Coding System:**
-- 🟢 **Green** - Solo parts assigned to current user
-- 🔴 **Red** - Chorus or group sections
-- 🔵 **Blue** - Duet or collaborative sections
-- ⚫ **Grey** - Other performers' parts (reduced emphasis)
+StageReady prioritizes **glanceability** - performers can quickly find their cue without extensive scrolling or searching. The interface is optimized for real-world performance conditions with high-contrast text and minimal distractions.
 
-**Key Design Decisions:**
-- ✅ Large, readable text (16px minimum) for stage lighting
-- ✅ Consecutive assigned lines automatically grouped
-- ✅ Cue system shows next entry point
-- ✅ High contrast for glanceability during performance
-- ✅ Mobile-first, portrait orientation optimized
+### Visual Language
 
-### ♿ Accessibility
+**Color-Coded Part Assignment:**
+- 🟢 **Green** - Your solo sections
+- 🔴 **Red** - Chorus or ensemble parts
+- 🔵 **Blue** - Duets or collaborations
+- ⚫ **Grey** - Other performers' parts (context only)
+
+**Smart Grouping:**
+Consecutive assigned lines automatically merge into coherent sections, reducing visual clutter and making the flow easier to follow.
+
+**Cue System:**
+Each performer sees their next entry point clearly marked, with reference to the previous line or section to eliminate confusion during fast-paced rehearsals.
+
+### Mobile-First Design
+
+- Large, readable typography (16px minimum)
+- Portrait orientation optimized for one-handed holding
+- Touch-friendly interface elements
+- Works under various lighting conditions
+- Minimal scrolling required during performance
+
+### Accessibility
+
 - Text labels accompany all color indicators
 - Clear visual hierarchy with section headers
-- Support for different screen sizes
-- Semantic design (not color-dependent only)
-
----
-
-## 💻 Technical Stack
-
-**Frontend:**
-- React Native (Expo)
-- NativeWind (Tailwind CSS for React Native)
-- JavaScript
-
-**Backend:**
-- Firebase Firestore (NoSQL)
-- Real-time listeners for live updates
-
-**Key Dependencies:**
-```
-expo: ~54.0.10
-react-native: 0.81.4
-nativewind: ^4.2.1
-firebase: latest
-```
-
----
-
-## 🗄️ Database Structure
-
-### Firestore Collections
-
-**songs collection:**
-```javascript
-{
-  title: string,
-  artist: string,
-  createdAt: timestamp,
-  lines: [string]  // Array of lyric lines
-}
-```
-
-**songs/{songId}/assignments subcollection:**
-```javascript
-{
-  name: string,
-  role: "singer" | "musician",
-  assignedLines: [number],  // Array indices of assigned lines
-  instrument?: string
-}
-```
-
-**Design approach:**
-- Each lyric line stored as array element
-- Array index serves as line number
-- Assignments reference line indices only
-- Frontend groups consecutive lines automatically
-
-See `DATABASE_STRUCTURE.md` for complete documentation.
+- Semantic design principles (color is enhancement, not requirement)
+- Responsive layouts for different screen sizes
 
 ---
 
 ## ✨ Features
 
-**Singer Interface:**
-- View assigned lyrics with color coding
-- Automatic grouping of consecutive lines
-- Next cue display
-- Real-time updates when assignments change
-- Clear distinction between your parts and others
+### Core Functionality
 
-**Database Integration:**
-- Real-time Firestore listeners
-- Line-by-line lyrics storage
-- Individual performer assignments
-- Support for multiple performers per song
+**Real-Time Collaboration:**
+- Instant updates when managers modify assignments
+- Multiple performers can access the same song simultaneously
+- Changes sync across all connected devices
 
-**Planned:**
-- Manager interface for uploads and assignments
-- Musician interface with chord progressions
-- User authentication
-- Multiple song management
+**Line-by-Line Precision:**
+- Managers assign individual lyric lines to specific performers
+- Flexible arrangement allows any line to go to any performer
+- Same line can be assigned to multiple performers (shared sections)
+
+**Intelligent Display:**
+- Automatic grouping of consecutive assigned lines
+- Visual distinction between your parts and others
+- Clear section headers showing performer names
+- Next cue indicator for seamless transitions
+
+**Multi-Role Support:**
+- Singer interface with lyrics focus
+- Musician interface with chord progressions and vocal cues
+- Manager dashboard for content upload and assignment
+
+### User Experience
+
+**For Performers:**
+- Personalized view showing only relevant information
+- Quick visual scanning during live performance
+- Context awareness (see what others are doing)
+- Rehearsal mode for practice
+
+**For Managers:**
+- Simple upload interface for song lyrics
+- Drag-and-drop line assignment
+- Real-time preview of performer views
+- Multi-song management
+- Assignment history and version control
+
+**Platform Features:**
+- User authentication and role management
+- Song library with search and filters
+- Export capabilities for offline reference
+- Offline mode for rehearsals without internet
 
 ---
 
-## 🚀 Quick Start
+## 💻 Technology
 
-### 📦 Prerequisites
+**Mobile Platform:**
+- React Native for cross-platform iOS and Android apps
+- Expo framework for streamlined development
+- NativeWind (Tailwind CSS) for consistent styling
+
+**Backend:**
+- Firebase Firestore for real-time database
+- Cloud storage for future file uploads
+- Firebase Authentication for user management
+
+**Performance:**
+- Optimized for low-latency updates
+- Efficient data structure for quick rendering
+- Local caching for offline support
+
+---
+
+## 🚀 Getting Started
+
+### Prerequisites
 
 - Node.js (v18 or higher)
-- npm or yarn
-- Expo Go app on your mobile device
+- npm or yarn package manager
+- Expo Go app installed on your mobile device
+  - [iOS App Store](https://apps.apple.com/app/expo-go/id982107779)
+  - [Android Play Store](https://play.google.com/store/apps/details?id=host.exp.exponent)
 
-### 📥 Installation
+### Installation
 
 **1. Clone the repository**
 ```bash
@@ -144,21 +153,24 @@ npm install
 npm start
 ```
 
-For different WiFi networks:
+For devices on different WiFi networks:
 ```bash
 npx expo start --tunnel
 ```
 
-**4. Run on your device**
+**4. Open on your device**
 
 **📱 iOS:**
-- Open Camera app
-- Scan the QR code
-- Tap notification to open in Expo Go
+1. Open the Camera app
+2. Point at the QR code displayed in terminal
+3. Tap the notification that appears
+4. App opens in Expo Go
 
 **🤖 Android:**
-- Open Expo Go app
-- Scan QR code from the app
+1. Open the Expo Go app
+2. Tap "Scan QR code"
+3. Point at the QR code displayed in terminal
+4. App loads automatically
 
 ---
 
@@ -168,17 +180,13 @@ npx expo start --tunnel
 StageReady/
 ├── frontend/
 │   ├── src/
-│   │   ├── screens/
-│   │   │   └── SingerScreen.js
-│   │   ├── services/
-│   │   │   └── firebase.js
-│   │   └── components/
-│   ├── App.js
-│   ├── global.css
-│   ├── tailwind.config.js
-│   ├── babel.config.js
-│   ├── metro.config.js
-│   └── package.json
+│   │   ├── screens/        # Main app screens
+│   │   ├── components/     # Reusable UI components
+│   │   └── services/       # Firebase and API integration
+│   ├── App.js              # Application entry point
+│   ├── global.css          # Global styles
+│   ├── tailwind.config.js  # Tailwind configuration
+│   └── package.json        # Dependencies
 └── README.md
 ```
 
@@ -190,18 +198,17 @@ StageReady/
 ```bash
 npx expo start --clear
 ```
-Check `tailwind.config.js` includes correct content paths.
 
-**Firebase connection errors:**
-- Verify Firebase config in `src/services/firebase.js`
-- Check Firestore rules are in test mode
-- Verify network connectivity
+**Cannot connect to development server:**
+- Ensure both computer and phone are on the same WiFi network
+- Or use tunnel mode: `npx expo start --tunnel`
 
-**Expo Go version mismatch:**
-- Update Expo Go from App Store/Play Store
-- Or upgrade project: `npm install expo@latest`
+**App not loading on device:**
+- Update Expo Go app to latest version
+- Check that QR code is clearly visible
+- Try entering the connection URL manually in Expo Go
 
-**Metro bundler issues:**
+**Metro bundler errors:**
 ```bash
 rm -rf node_modules
 npm install
@@ -212,21 +219,16 @@ npx expo start --clear
 
 ## 🤝 Contributing
 
-This is an academic HCI project. Contributions focused on improving user experience and accessibility are welcome.
+StageReady is an HCI research project exploring collaborative interfaces for performance groups. Contributions that enhance user experience, accessibility, or mobile interaction patterns are welcome.
 
 ---
 
-## License
+## 📄 License
 
-Educational use only
-
----
-
-## 📚 Documentation
-
-- 📖 Database Structure: See `DATABASE_STRUCTURE.md`
-- 🎨 Design Sketches: See `files/sketching.md`
+Educational use only - Academic HCI Project
 
 ---
 
-Built with React Native, Expo, NativeWind, and Firebase
+**Built with React Native, Expo, NativeWind, and Firebase**
+
+*Designed for performers, by performers*
