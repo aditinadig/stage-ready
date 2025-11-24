@@ -11,7 +11,7 @@ function App() {
   return (
     <div className="app-shell">
       {/* Toggle above the device */}
-      <div className="view-toggle">
+      {/* <div className="view-toggle">
         <span className="view-toggle__label">View:</span>
         <button
           type="button"
@@ -35,10 +35,10 @@ function App() {
         >
           Tablet
         </button>
-      </div>
+      </div> */}
 
       {/* Device frame */}
-      <div className={`device-frame device-frame--${deviceMode}`}>
+      <div className={`device-frame device-frame--tablet`}>
         {/* Header inside device */}
         {/* <header className="device-header">
           <div className="device-header__title">
